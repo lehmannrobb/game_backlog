@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 1rem;
+}
+
+.log {
+    display: flex;
+}
+
+.circle {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ff0000;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50rem;
+    margin-left: 0.25rem;
+}
+
+#total {
+    color: #fff;
+}
+
+.dlt-btn {
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-self: center;   
+}
+
+.dlt-btn:hover {
+    transform: scale(1.1);
+}
