@@ -125,7 +125,7 @@ const Games = ({ games, setGames }) => {
                         )
                     })}
                 </tbody>
-            </table> : null }
+            </table> : <h5>You have no games in your backlog</h5> }
         </div>
     )
 }
