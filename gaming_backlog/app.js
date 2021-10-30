@@ -44,6 +44,7 @@ const Header = ({ total }) => {
 }
 
 const Logger = ({ games, setGames }) => {
+    // Update game log
     const updateLog = (e) => {
         e.preventDefault();
 
@@ -52,10 +53,12 @@ const Logger = ({ games, setGames }) => {
         const title = document.querySelector('.title').value;
         const genre = document.querySelector('.genre').value;
 
+        // Check for empty string
         if (titleInput === '') {
             alert('No game added. Please enter a title');
 
-        }   else if (games.some(game => game.title.toLowerCase() === titleInput.toLowerCase())) {
+        }   // Check if title exists
+            else if (games.some(game => game.title.toLowerCase() === titleInput.toLowerCase())) {
                 alert('This game is already in your backlog.');
 
             }   else {
@@ -89,6 +92,7 @@ const Logger = ({ games, setGames }) => {
 }
 
 const Games = ({ games, setGames }) => {
+    // Delete game from log
     const onDelete = (id) => {
         setGames(games.filter(game => game.id !== id));
     }
