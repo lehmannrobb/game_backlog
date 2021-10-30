@@ -1,5 +1,6 @@
 const App = () => {
     const [games, setGames] = React.useState([
+        // (Static) Will implement db
         {
             id: Math.random(),
             title: 'The Last of Us',
