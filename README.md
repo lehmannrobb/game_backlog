@@ -1,5 +1,5 @@
 # Game Backlog App
-A CRUD app project for a gaming backlog
+A CRUD app project for a gaming backlog (work in progress)
 
 ## Todos
 - Create a login
