@@ -2,17 +2,17 @@ const App = () => {
     const [games, setGames] = React.useState([
         // (Static) Will implement db
         {
-            id: Math.random(),
+            id: 1,
             title: 'The Last of Us',
             genre: 'Action-adventure'
         },
         {
-            id: Math.random(),
+            id: 2,
             title: 'Dark Souls',
             genre: 'RPG'
         },
         {
-            id: Math.random(),
+            id: 3,
             title: 'Stardew Valley',
             genre: 'Simulation, RPG'
         }
@@ -44,6 +44,7 @@ const Header = ({ total }) => {
 }
 
 const Logger = ({ games, setGames }) => {
+    const [showForm, setShowForm] = React.useState(false);
     // Update game log
     const updateLog = (e) => {
         e.preventDefault();
@@ -55,7 +56,7 @@ const Logger = ({ games, setGames }) => {
 
         // Check for empty string
         if (titleInput === '') {
-            alert('No game added. Please enter a title');
+            alert('No game added. Please enter a title.');
 
         }   // Check if title exists
             else if (games.some(game => game.title.toLowerCase() === titleInput.toLowerCase())) {
@@ -63,12 +64,10 @@ const Logger = ({ games, setGames }) => {
 
             }   else {
                     setGames(games => [...games, {
-                        id: Math.random(),
+                        id: Math.floor(Math.random() * 1000),
                         title: title,
                         genre: genre
                     }])
-    
-                    console.log('click');
                 }
         
         form.reset();
@@ -76,7 +75,8 @@ const Logger = ({ games, setGames }) => {
     
     return (
         <div className="container">
-            <form onSubmit={updateLog} id="form">
+            <button type="submit" id="add-btn" className={!showForm ? "btn btn-dark mt-3" : "btn btn-danger mt-3"} onClick={() => setShowForm(!showForm)}>{!showForm ? 'Add a Game' : 'Cancel'}</button>
+            {showForm && <form onSubmit={updateLog} id="form">
                 <div className="form-group mt-3">
                     <label htmlFor="game-title">Title</label>
                     <input type="text" className="form-control title" id="title-input"></input>
@@ -85,8 +85,9 @@ const Logger = ({ games, setGames }) => {
                     <label htmlFor="game-genre">Genre(s) (optional)</label>
                     <input type="text" className="form-control genre"></input>
                 </div>             
-                <button type="submit" className="btn btn-dark mt-3">Add Game</button>
+                <button type="submit" className="btn btn-dark mt-3">Add to Backlog</button>
             </form>
+            }
         </div>
     )
 }
@@ -125,7 +126,7 @@ const Games = ({ games, setGames }) => {
                         )
                     })}
                 </tbody>
-            </table> : <h5>You have no games in your backlog</h5> }
+            </table> : <h5>You have no games in your backlog.</h5> }
         </div>
     )
 }
