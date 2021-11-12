@@ -1,6 +1,13 @@
 body {
     margin: 0;
+    padding: 0;
+}
+
+.app {
+    margin: 0;
     padding: 1rem;
+    height: auto;
+    min-height: 100vh;
 }
 
 .log {
@@ -26,13 +33,36 @@ body {
     color: #fff;
 }
 
+.btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#theme-toggler {
+    border-radius: 50%;
+    align-self: center;
+    transition: ease-in 0.25s;
+}
+
+#theme-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .dlt-btn {
     color: #ff0000;
     display: flex;
+    cursor: pointer;
     justify-content: center;
     align-self: center;   
 }
 
 .dlt-btn:hover {
     transform: scale(1.1);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
