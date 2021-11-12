@@ -36,7 +36,7 @@ const App = () => {
         <div className="app" style={theme === 'light' ? lightTheme : darkTheme}>
             <Header total={total} />
             <Logger games={games} setGames={setGames} theme={theme} setTheme={setTheme} />
-            <Games games={games} setGames={setGames} theme={theme} lightTheme={lightTheme} darkTheme={darkTheme} />
+            <Games games={games} setGames={setGames} theme={theme} />
         </div>
     )
 }
@@ -120,7 +120,7 @@ const Logger = ({ games, setGames, theme, setTheme }) => {
     )
 }
 
-const Games = ({ games, setGames, theme, lightTheme, darkTheme }) => {
+const Games = ({ games, setGames, theme }) => {
     // Delete game from log
     const onDelete = (id) => {
         setGames(games.filter(game => game.id !== id));
