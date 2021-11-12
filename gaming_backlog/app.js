@@ -17,14 +17,26 @@ const App = () => {
             genre: 'Simulation, RPG'
         }
     ]);
+
+    const lightTheme = {
+        backgroundColor: "#fff",
+        color: "#000"
+    }
+
+    const darkTheme = {
+        backgroundColor: "#000",
+        color: "#fff"
+    }
+
+    const [theme, setTheme] = React.useState('light');
     
     const total = games.length;
 
     return (
-        <div>
+        <div className="app" style={theme === 'light' ? lightTheme : darkTheme}>
             <Header total={total} />
-            <Logger games={games} setGames={setGames} />
-            <Games games={games} setGames={setGames} />
+            <Logger games={games} setGames={setGames} theme={theme} setTheme={setTheme} />
+            <Games games={games} setGames={setGames} theme={theme} lightTheme={lightTheme} darkTheme={darkTheme} />
         </div>
     )
 }
@@ -43,7 +55,7 @@ const Header = ({ total }) => {
     )
 }
 
-const Logger = ({ games, setGames }) => {
+const Logger = ({ games, setGames, theme, setTheme }) => {
     const [showForm, setShowForm] = React.useState(false);
     // Update game log
     const updateLog = (e) => {
@@ -72,10 +84,26 @@ const Logger = ({ games, setGames }) => {
         
         form.reset();
     }
+
+    const toggleTheme = () => {
+        if (theme == 'light') {
+            setTheme('dark');
+        }   else {
+            setTheme('light');
+        }
+    }
     
     return (
         <div className="container">
-            <button type="submit" id="add-btn" className={!showForm ? "btn btn-dark mt-3" : "btn btn-danger mt-3"} onClick={() => setShowForm(!showForm)}>{!showForm ? 'Add a Game' : 'Cancel'}</button>
+            <div className="btn-wrapper">
+                {/* Form Add/Cancel Btns */}
+                <button type="submit" id="add-btn" className={!showForm ? "btn btn-dark mt-3" : "btn btn-danger mt-3"} onClick={() => setShowForm(!showForm)}>{!showForm ? 'Add a Game' : 'Cancel'}</button>
+                {/* Theme Toggler Btn */}
+                <button className={theme === 'light' ? "btn btn-dark mt-3" : "btn btn-light mt-3" } id="theme-toggler" onClick={toggleTheme}>
+                <i className={theme === 'light' ? "far fa-moon" : "fas fa-sun"}></i>
+                </button>
+            </div>
+
             {showForm && <form onSubmit={updateLog} id="form">
                 <div className="form-group mt-3">
                     <label htmlFor="game-title">Title</label>
@@ -92,7 +120,7 @@ const Logger = ({ games, setGames }) => {
     )
 }
 
-const Games = ({ games, setGames }) => {
+const Games = ({ games, setGames, theme, lightTheme, darkTheme }) => {
     // Delete game from log
     const onDelete = (id) => {
         setGames(games.filter(game => game.id !== id));
@@ -100,7 +128,7 @@ const Games = ({ games, setGames }) => {
 
     return (
         <div className="container mt-3">
-            { games.length > 0 ? <table className="table table-striped table-bordered table-hover table-condensed">
+            { games.length > 0 ? <table className={theme === 'light' ? "table table-striped table-bordered table-hover table-condensed" : "table table-dark table-striped table-bordered table-condensed"}>
                 <thead>
                     <tr>
                         <th>Title</th>
